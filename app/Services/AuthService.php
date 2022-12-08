@@ -14,7 +14,6 @@ class AuthService
         $data['password'] = bcrypt($data['password']);
         $user   = User::create($data);
         $token  =  $user->createToken('sarmayex')->accessToken;
-        dd($token);
         return ['token' => $token];
 
     }
