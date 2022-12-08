@@ -15,6 +15,6 @@ class RegisterController extends Controller
     public function register(RegisterUserRequest $request)
     {
         $data = (new AuthService)->register($request->all());
-        return Response::customResponse(201, __('messages.user_registered'), $data);
+        return Response::CustomResponse(201, __('messages.user_registered'), $data);
     }
 }
