@@ -2,8 +2,9 @@
 
 namespace App\Exceptions;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Http\Response;
+use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
@@ -50,16 +51,70 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($request->wantsJson()) {   //add Accept: application/json in request
+            return $this->handleApiException($request, $exception);
+        }
+
         return parent::render($request, $exception);
     }
 
 
-    public function prepareResponse($request, Throwable $exception)
+    private function handleApiException($request, Throwable $exception)
     {
-        if($request->jsJson())
-        {
-            return 'fuck';
+        $exception = $this->prepareException($exception);
+
+        if ($exception instanceof \Illuminate\Http\Exception\HttpResponseException) {
+            $exception = $exception->getResponse();
         }
-        return parent::prepareResponse($request, $exception);
+
+        if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
+            $exception = $this->unauthenticated($request, $exception);
+        }
+
+        if ($exception instanceof \Illuminate\Validation\ValidationException) {
+            $exception = $this->convertValidationExceptionToResponse($exception, $request);
+        }
+
+        return $this->customApiResponse($exception);
     }
+
+
+
+    private function customApiResponse($exception)
+    {
+        if (method_exists($exception, 'getStatusCode')) {
+            $statusCode = $exception->getStatusCode();
+        } else {
+            $statusCode = 500;
+        }
+
+        $response = [];
+
+        switch ($statusCode) {
+            case 401:
+                $message = __('messages.403');
+                break;
+            case 403:
+                $message = __('messages.403');
+                break;
+            case 404:
+                $message = __('messages.404');
+                break;
+            case 405:
+                $message = __('messages.405');
+                break;
+            case 422:
+                $message = $exception->original['errors'];
+                break;
+            default:
+                $message = __('messages.500');
+                break;
+        }
+
+        $response['status'] = $statusCode;
+
+        return Response::CustomResponse($statusCode, $message);
+    }
+
+
 }

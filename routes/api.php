@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\Admin\UserController;
@@ -58,4 +59,10 @@ Route::middleware(['auth:api'])->group(function () {
     });
 
 
+});
+
+
+
+Route::fallback(function(){
+    return Response::CustomResponse(404, __('messages.404'));
 });
