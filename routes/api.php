@@ -53,6 +53,8 @@ Route::middleware(['auth:api'])->group(function () {
 
         Route::delete('tasks/{task:id}', [AdminTaskController::class, 'destroy']);
 
+        Route::post('tasks/mention', [AdminTaskController::class, 'mention']);
+
     });
 
 

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Task;
+use App\User;
 use Illuminate\Http\Request;
+use App\Services\TaskService;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskResource;
 use App\Http\Requests\UpdateTaskRequest;
-use App\Services\TaskService;
+use App\Http\Requests\MentionAdminReqeust;
+use League\CommonMark\Extension\Mention\Mention;
 
 class TaskController extends Controller
 {
@@ -30,7 +33,13 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-        return Response::CustomResponse(200, __('task_deleted'), []);
+        return Response::CustomResponse(200, __('messages.task_deleted'), []);
     }
     
+
+    public function mention(MentionAdminReqeust $request)
+    {
+        (new TaskService)->mention(['task_id' => $request->task_id, 'user_id' => auth()->user()->id]);
+        return Response::CustomResponse(201, __('messages.task_mentioned'), []);
+    }
 }

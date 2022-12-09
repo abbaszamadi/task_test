@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Task;
+use App\TasksUser;
 
 class TaskService
 {
@@ -19,4 +20,9 @@ class TaskService
     }
 
 
+
+    public function mention($data)
+    {
+        return TasksUser::firstOrCreate($data);
+    }
 }

@@ -52,4 +52,14 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+
+
+    public function prepareResponse($request, Throwable $exception)
+    {
+        if($request->jsJson())
+        {
+            return 'fuck';
+        }
+        return parent::prepareResponse($request, $exception);
+    }
 }

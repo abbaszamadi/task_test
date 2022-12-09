@@ -7,5 +7,6 @@ return [
     'task_created'      => 'تسک با موفقیت ایجاد شد',
     'task_updated'      => 'تسک با موفقیت آپدیت شد.',
     'task_deleted'      => 'تسک حذف شد',
-    'task_deny_delete'  => 'امکان حذف تسک برای شما وجود ندارد'
+    'task_deny_delete'  => 'امکان حذف تسک برای شما وجود ندارد',
+    'task_mentioned'    => 'تسک با موفقیت منشن شد.'
 ];
