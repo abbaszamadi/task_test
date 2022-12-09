@@ -11,10 +11,16 @@ use App\Http\Resources\UserResource;
 class UserController extends Controller
 {
     
+
+    /**
+    * Display a listing of the resource.
+    *
+    * @return Response
+    */
     public function index()
     {
         $users = User::get();
         return Response::CustomResponse(200, '', ['users' => UserResource::collection($users)]);
     }
-    
+
 }

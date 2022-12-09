@@ -16,6 +16,11 @@ use League\CommonMark\Extension\Mention\Mention;
 class TaskController extends Controller
 {
     
+    /**
+    * Display a listing of the resource.
+    *
+    * @return Response
+    */
     public function index()
     {
         $tasks = Task::get();
@@ -23,6 +28,15 @@ class TaskController extends Controller
         return Response::CustomResponse(200, '', ['tasks' => TaskResource::collection($tasks)]);
     }
 
+
+
+    /**
+    * Update the specified resource in storage.
+    *
+    * @param UpdateTaskRequest $request
+    * @param  Task  $task
+    * @return Response
+    */
     public function update(UpdateTaskRequest $request, Task $task)
     {
         (new TaskService)->update($task, $request->all());
@@ -30,6 +44,13 @@ class TaskController extends Controller
     }
 
 
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param  Task  $task
+    * @return Response
+    */
     public function destroy(Task $task)
     {
         $task->delete();
@@ -37,6 +58,13 @@ class TaskController extends Controller
     }
     
 
+
+    /**
+    * mention admin(user that logged in) to a task
+    *
+    * @param  MentionAdminReqeust  $request
+    * @return Response
+    */
     public function mention(MentionAdminReqeust $request)
     {
         (new TaskService)->mention(['task_id' => $request->task_id, 'user_id' => auth()->user()->id]);
