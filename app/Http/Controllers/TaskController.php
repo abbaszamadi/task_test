@@ -29,4 +29,11 @@ class TaskController extends Controller
 
 
 
+    public function destroy(Task $task)
+    {
+        $task->delete();
+        return Response::CustomResponse(200, __('task_deleted'), []);
+    }
+
+
 }
