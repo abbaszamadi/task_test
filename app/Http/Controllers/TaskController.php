@@ -6,8 +6,9 @@ use App\Task;
 use Illuminate\Http\Request;
 use App\Services\TaskService;
 use Illuminate\Http\Response;
-use App\Http\Requests\StoreTaskRequest;
 use App\Http\Resources\TaskResource;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\StoreTaskRequest;
 
 class TaskController extends Controller
 {
@@ -31,8 +32,14 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        $task->delete();
-        return Response::CustomResponse(200, __('task_deleted'), []);
+        if (Gate::allows('destroy-task', $task)) {
+
+            $task->delete();
+            return Response::CustomResponse(200, __('task_deleted'), []);
+        }
+        return Response::CustomResponse(403, __('messages.task_deny_delete'), []);
+
+
     }
 
 

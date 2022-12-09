@@ -26,10 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Response::macro('CustomResponse', function($statusCode=null, $message='', $data=[]){
             return response()->json([
-                'status' => $statusCode,
                 'message'    => $message,
                 'data'       => $data
-            ]);
+            ], $statusCode);
         });
     }
 }
