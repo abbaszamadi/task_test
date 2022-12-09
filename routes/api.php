@@ -46,6 +46,7 @@ Route::middleware(['auth:api'])->group(function () {
 
         Route::get('/users', [UserController::class, 'index']);
 
+        Route::get('/tasks', [TaskController::class, 'index']);
 
     });
 
