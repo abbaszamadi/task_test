@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\TaskController as AdminTaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +47,7 @@ Route::middleware(['auth:api'])->group(function () {
 
         Route::get('/users', [UserController::class, 'index']);
 
-        Route::get('/tasks', [TaskController::class, 'index']);
+        Route::get('/tasks', [AdminTaskController::class, 'index']);
 
     });
 
