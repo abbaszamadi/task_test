@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::get();
-        return Response::CustomResponse(200, '', UserResource::collection($users));
+        return Response::CustomResponse(200, '', ['users' => UserResource::collection($users)]);
     }
-
+    
 }
