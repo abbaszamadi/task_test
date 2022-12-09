@@ -51,6 +51,8 @@ Route::middleware(['auth:api'])->group(function () {
 
         Route::put('/tasks/update/{task:id}', [AdminTaskController::class, 'update']);
 
+        Route::delete('tasks/{task:id}', [AdminTaskController::class, 'destroy']);
+
     });
 
 

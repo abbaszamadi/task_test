@@ -39,7 +39,6 @@ class TaskController extends Controller
         }
         return Response::CustomResponse(403, __('messages.task_deny_delete'), []);
 
-
     }
 
 

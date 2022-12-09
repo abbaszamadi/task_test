@@ -20,11 +20,17 @@ class TaskController extends Controller
         return Response::CustomResponse(200, '', ['tasks' => TaskResource::collection($tasks)]);
     }
 
-
     public function update(UpdateTaskRequest $request, Task $task)
     {
         (new TaskService)->update($task, $request->all());
         return Response::CustomResponse(200, __('messages.task_updated'), []);
+    }
+
+
+    public function destroy(Task $task)
+    {
+        $task->delete();
+        return Response::CustomResponse(200, __('task_deleted'), []);
     }
     
 }
