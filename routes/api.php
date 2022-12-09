@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,17 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/login', [LoginController::class, 'login']);
+
+
+
+Route::middleware(['auth:api'])->prefix('members')->group(function () {
+
+    Route::prefix('tasks')->group(function(){
+        Route::post('/store', [TaskController::class, 'store']);
+
+    });
+
+
     
+
+});
