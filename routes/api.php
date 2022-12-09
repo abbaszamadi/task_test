@@ -49,6 +49,8 @@ Route::middleware(['auth:api'])->group(function () {
 
         Route::get('/tasks', [AdminTaskController::class, 'index']);
 
+        Route::put('/tasks/update/{task:id}', [AdminTaskController::class, 'update']);
+
     });
 
 

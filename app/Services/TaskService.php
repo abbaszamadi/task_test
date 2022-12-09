@@ -11,5 +11,10 @@ class TaskService
         return Task::create($data);
     }
 
+    public function update($task, $data)
+    {
+        return $task->update($data);
+    }
+
 
 }
