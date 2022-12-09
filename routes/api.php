@@ -44,19 +44,20 @@ Route::middleware(['auth:api'])->group(function () {
 
 
     //admin routes
-    Route::prefix('admin')->group(function(){
+    Route::middleware('admin')->group(function(){
 
-        Route::get('/users', [UserController::class, 'index']);
+        Route::prefix('admin')->group(function(){
 
-        Route::get('/tasks', [AdminTaskController::class, 'index']);
-
-        Route::put('/tasks/update/{task:id}', [AdminTaskController::class, 'update']);
-
-        Route::delete('tasks/{task:id}', [AdminTaskController::class, 'destroy']);
-
-        Route::post('tasks/mention', [AdminTaskController::class, 'mention']);
-
+            Route::get('/users', [UserController::class, 'index']);
+    
+            Route::get('/tasks', [AdminTaskController::class, 'index']);
+    
+            Route::put('/tasks/update/{task:id}', [AdminTaskController::class, 'update']);
+    
+            Route::delete('tasks/{task:id}', [AdminTaskController::class, 'destroy']);
+    
+            Route::post('tasks/mention', [AdminTaskController::class, 'mention']);
+        });
     });
-
 
 });

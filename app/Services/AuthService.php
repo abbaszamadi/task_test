@@ -22,7 +22,7 @@ class AuthService
     {
 
         if (auth()->attempt($data)) {
-            $token = auth()->user()->createToken('LaravelAuthApp')->accessToken;
+            $token = auth()->user()->createToken('sarmayex')->accessToken;
             return [
                 'status'    => 200,
                 'message'   => __('messages.login_success'),
