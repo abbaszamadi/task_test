@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,15 +29,25 @@ Route::post('/login', [LoginController::class, 'login']);
 
 
 
-Route::middleware(['auth:api'])->prefix('members')->group(function () {
+Route::middleware(['auth:api'])->group(function () {
 
-    Route::prefix('tasks')->group(function(){
-        Route::get('/', [TaskController::class, 'index']);
-        Route::post('/store', [TaskController::class, 'store']);
-        Route::delete('/{task:id}', [TaskController::class, 'destroy']);
+    // members routes
+    Route::prefix('members')->group(function(){
+        Route::prefix('tasks')->group(function(){
+            Route::get('/', [TaskController::class, 'index']);
+            Route::post('/store', [TaskController::class, 'store']);
+            Route::delete('/{task:id}', [TaskController::class, 'destroy']);
+        });
     });
 
 
+    //admin routes
+    Route::prefix('admin')->group(function(){
+
+        Route::get('/users', [UserController::class, 'index']);
+
+
+    });
 
 
 });
