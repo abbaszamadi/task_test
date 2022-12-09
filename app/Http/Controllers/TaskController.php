@@ -13,6 +13,12 @@ class TaskController extends Controller
 {
 
 
+    public function index()
+    {
+        $tasks = Task::where('user_id', auth()->user()->id)->get();
+        return Response::CustomResponse(200, '', $tasks);
+    }
+
     public function store(StoreTaskRequest $request)
     {
         $task = (new TaskService)->store($request->all());

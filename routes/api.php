@@ -31,11 +31,11 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::middleware(['auth:api'])->prefix('members')->group(function () {
 
     Route::prefix('tasks')->group(function(){
+        Route::get('/', [TaskController::class, 'index']);
         Route::post('/store', [TaskController::class, 'store']);
-
     });
 
 
-    
+
 
 });
