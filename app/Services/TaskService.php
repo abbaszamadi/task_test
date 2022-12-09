@@ -8,7 +8,9 @@ class TaskService
 
     public function store($data)
     {
-        return Task::create($data);
+        $task = Task::create($data);
+        $task->users()->attach(auth()->user()->id);
+        return $task;
     }
 
     public function update($task, $data)
