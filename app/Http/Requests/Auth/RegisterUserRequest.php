@@ -27,8 +27,15 @@ class RegisterUserRequest extends FormRequest
             'name'  => ['required', 'string', 'min:3', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required','min:6', 'max:20', 'confirmed'],
+            'role'      => ['required', 'string']
         ];
     }
 
+    public function prepareForValidation()
+    {
+        return $this->merge([
+            'role'  => 'member'
+        ]);
+    }
 
 }

@@ -60,9 +60,3 @@ Route::middleware(['auth:api'])->group(function () {
 
 
 });
-
-
-
-Route::fallback(function(){
-    return Response::CustomResponse(404, __('messages.404'));
-});
