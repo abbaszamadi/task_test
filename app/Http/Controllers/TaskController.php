@@ -12,7 +12,7 @@ use App\Http\Resources\TaskResource;
 class TaskController extends Controller
 {
 
-    
+
     public function store(StoreTaskRequest $request)
     {
         $task = (new TaskService)->store($request->all());
@@ -21,6 +21,6 @@ class TaskController extends Controller
     }
 
 
-    
+
 
 }

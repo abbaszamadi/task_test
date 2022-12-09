@@ -26,6 +26,16 @@ class StoreTaskRequest extends FormRequest
         return [
             'title' => ['required', 'min:5', 'max:255'],
             'description'   => ['required', 'max:1024'],
+            'user_id'       => ['required']
         ];
     }
+
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'user_id'  => auth()->user()->id
+        ]);
+    }
+
 }
