@@ -1,4 +1,30 @@
-### - اجرای دستور زیر جهت تولید کلید های passport
+### - نکات مهم جهت اجرای درست پروژه:
+#### - اجرای دستور زیر جهت تولید کلید های passport
  - php artisan passport:keys
-###
-- لیست کالکشن api ها جهت تست در پوشه ی api_collection قرار داده شده است.
+#### لیست api ها:
+
+POST
+register user
+POST
+/api/login
+
+GET
+/api/admin/tasks
+
+DELETE
+/api/members/tasks/6
+
+GET
+/api/members/tasks
+
+POST
+/api/members/tasks/store
+
+GET
+/api/admin/users
+
+PUT
+/api/admin/tasks/update/8
+
+POST
+/api/admin/tasks/mention
